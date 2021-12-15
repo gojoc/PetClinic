@@ -15,17 +15,31 @@
     </parent>
     <groupId>udemy.spring</groupId>
     <artifactId>PetClinic</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <name>PetClinic</name>
     <description>PetClinic</description>
     <properties>
         <java.version>11</java.version>
+        <org.apache.maven.plugins.version>3.0.0-M4</org.apache.maven.plugins.version>
     </properties>
+    <scm>
+        <developerConnection>scm:git:https://github.com/gojoc/PetClinic.git</developerConnection>
+        <tag>PetClinic-0.0.1</tag>
+    </scm>
     <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>${org.apache.maven.plugins.version}</version>
+                <configuration>
+                    <goals>install</goals>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                </configuration>
             </plugin>
         </plugins>
     </build>
