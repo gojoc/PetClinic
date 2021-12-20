@@ -1,5 +1,6 @@
 package udemy.spring.petclinic.bootstrap;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -7,21 +8,15 @@ import udemy.spring.petclinic.model.Owner;
 import udemy.spring.petclinic.model.Vet;
 import udemy.spring.petclinic.service.OwnerService;
 import udemy.spring.petclinic.service.VetService;
-import udemy.spring.petclinic.service.map.OwnerMapService;
-import udemy.spring.petclinic.service.map.VetMapService;
 
 import java.util.UUID;
 
 @Slf4j
 @Component
+@AllArgsConstructor
 public class DataLoader implements CommandLineRunner {
     private final OwnerService ownerService;
     private final VetService vetService;
-
-    public DataLoader() {
-        ownerService = new OwnerMapService();
-        vetService = new VetMapService();
-    }
 
     @Override
     public void run(String... arguments) {
