@@ -26,6 +26,18 @@
         <developerConnection>scm:git:https://github.com/gojoc/PetClinic.git</developerConnection>
         <tag>PetClinic-0.0.1</tag>
     </scm>
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
     <build>
         <plugins>
             <plugin>
