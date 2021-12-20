@@ -4,12 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import udemy.spring.petclinic.exception.NullException;
 import udemy.spring.petclinic.model.Owner;
 import udemy.spring.petclinic.model.Vet;
 import udemy.spring.petclinic.service.OwnerService;
 import udemy.spring.petclinic.service.VetService;
-
-import java.util.UUID;
 
 @Slf4j
 @Component
@@ -19,9 +18,8 @@ public class DataLoader implements CommandLineRunner {
     private final VetService vetService;
 
     @Override
-    public void run(String... arguments) {
+    public void run(String... arguments) throws NullException {
         Owner firstOwner = Owner.builder()
-                .id(UUID.randomUUID())
                 .firstName("Jane")
                 .lastName("Austen")
                 .build();
@@ -29,7 +27,6 @@ public class DataLoader implements CommandLineRunner {
         log.info("[DataLoader] saved first owner: {}", firstOwner);
 
         Owner secondOwner = Owner.builder()
-                .id(UUID.randomUUID())
                 .firstName("David")
                 .lastName("Bowen")
                 .build();
@@ -37,7 +34,6 @@ public class DataLoader implements CommandLineRunner {
         log.info("[DataLoader] saved second owner: {}", secondOwner);
 
         Vet firstVet = Vet.builder()
-                .id(UUID.randomUUID())
                 .firstName("Clara")
                 .lastName("Johnson")
                 .build();
@@ -45,7 +41,6 @@ public class DataLoader implements CommandLineRunner {
         log.info("[DataLoader] saved first vet: {}", firstVet);
 
         Vet secondVet = Vet.builder()
-                .id(UUID.randomUUID())
                 .firstName("Mark")
                 .lastName("Smith")
                 .build();

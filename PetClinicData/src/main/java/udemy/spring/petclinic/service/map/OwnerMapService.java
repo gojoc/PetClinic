@@ -1,6 +1,7 @@
 package udemy.spring.petclinic.service.map;
 
 import org.springframework.stereotype.Service;
+import udemy.spring.petclinic.exception.NullException;
 import udemy.spring.petclinic.model.Owner;
 import udemy.spring.petclinic.service.OwnerService;
 
@@ -29,8 +30,8 @@ public class OwnerMapService extends AbstractMapService<Owner, UUID> implements 
     }
 
     @Override
-    public Owner save(Owner owner) {
-        return super.save(owner.getId(), owner);
+    public Owner save(Owner owner) throws NullException {
+        return super.save(owner);
     }
 
     @Override

@@ -1,5 +1,7 @@
 package udemy.spring.petclinic.service;
 
+import udemy.spring.petclinic.exception.NullException;
+
 import java.util.Set;
 
 public interface CrudService<T, ID> {
@@ -7,7 +9,7 @@ public interface CrudService<T, ID> {
 
     T findById(ID id);
 
-    T save(T object);
+    T save(T object) throws NullException;
 
     void deleteById(ID id);
 

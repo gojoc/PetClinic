@@ -1,6 +1,7 @@
 package udemy.spring.petclinic.service.map;
 
 import org.springframework.stereotype.Service;
+import udemy.spring.petclinic.exception.NullException;
 import udemy.spring.petclinic.model.Pet;
 import udemy.spring.petclinic.service.PetService;
 
@@ -20,8 +21,8 @@ public class PetMapService extends AbstractMapService<Pet, UUID> implements PetS
     }
 
     @Override
-    public Pet save(Pet pet) {
-        return super.save(pet.getId(), pet);
+    public Pet save(Pet pet) throws NullException {
+        return super.save(pet);
     }
 
     @Override
