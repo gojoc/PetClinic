@@ -6,11 +6,15 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import udemy.spring.petclinic.exception.NullException;
 import udemy.spring.petclinic.model.Owner;
+import udemy.spring.petclinic.model.Pet;
 import udemy.spring.petclinic.model.PetType;
 import udemy.spring.petclinic.model.Vet;
 import udemy.spring.petclinic.service.OwnerService;
+import udemy.spring.petclinic.service.PetService;
 import udemy.spring.petclinic.service.PetTypeService;
 import udemy.spring.petclinic.service.VetService;
+
+import java.time.LocalDate;
 
 @Slf4j
 @Component
@@ -18,6 +22,7 @@ import udemy.spring.petclinic.service.VetService;
 public class DataLoader implements CommandLineRunner {
     private final PetTypeService petTypeService;
     private final OwnerService ownerService;
+    private final PetService petService;
     private final VetService vetService;
 
     @Override
@@ -25,18 +30,21 @@ public class DataLoader implements CommandLineRunner {
         PetType firstPetType = PetType.builder()
                 .name("Dog")
                 .build();
-        PetType firstSavedPetType = petTypeService.save(firstPetType);
-        log.info("[DataLoader] saved firstPetType: {}", firstSavedPetType);
+        petTypeService.save(firstPetType);
+        log.info("[DataLoader] saved firstPetType: {}", firstPetType);
 
         PetType secondPetType = PetType.builder()
                 .name("Cat")
                 .build();
-        PetType secondSavedPetType = petTypeService.save(secondPetType);
-        log.info("[DataLoader] saved secondPetType: {}", secondSavedPetType);
+        petTypeService.save(secondPetType);
+        log.info("[DataLoader] saved secondPetType: {}", secondPetType);
 
         Owner firstOwner = Owner.builder()
                 .firstName("Jane")
                 .lastName("Austen")
+                .address("Sunset Street 15")
+                .city("New York")
+                .telephone("7184396775")
                 .build();
         ownerService.save(firstOwner);
         log.info("[DataLoader] saved first owner: {}", firstOwner);
@@ -44,9 +52,32 @@ public class DataLoader implements CommandLineRunner {
         Owner secondOwner = Owner.builder()
                 .firstName("David")
                 .lastName("Bowen")
+                .address("Hollywood Boulevard 20")
+                .city("Los Angeles")
+                .telephone("3374402899")
                 .build();
         ownerService.save(secondOwner);
         log.info("[DataLoader] saved second owner: {}", secondOwner);
+
+        Pet firstPet = Pet.builder()
+                .name("Rosco")
+                .birthDate(LocalDate.of(2020, 10, 15))
+                .petType(firstPetType)
+                .owner(firstOwner)
+                .build();
+        petService.save(firstPet);
+        firstOwner.getPets().add(firstPet);
+        log.info("[DataLoader] saved first pet: {}", firstPet);
+
+        Pet secondPet = Pet.builder()
+                .name("Luxor")
+                .birthDate(LocalDate.of(2021, 2, 20))
+                .petType(secondPetType)
+                .owner(secondOwner)
+                .build();
+        petService.save(secondPet);
+        secondOwner.getPets().add(secondPet);
+        log.info("[DataLoader] saved second pet: {}", secondPet);
 
         Vet firstVet = Vet.builder()
                 .firstName("Clara")
