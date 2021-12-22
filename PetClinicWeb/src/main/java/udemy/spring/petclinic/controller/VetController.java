@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import udemy.spring.petclinic.service.VetService;
 
 @Controller
-@RequestMapping("vets")
+@RequestMapping({"vets", "vets.html"})
 @AllArgsConstructor
 public class VetController {
     private final VetService vetService;
