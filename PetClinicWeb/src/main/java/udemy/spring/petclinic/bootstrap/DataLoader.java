@@ -8,10 +8,12 @@ import udemy.spring.petclinic.exception.NullException;
 import udemy.spring.petclinic.model.Owner;
 import udemy.spring.petclinic.model.Pet;
 import udemy.spring.petclinic.model.PetType;
+import udemy.spring.petclinic.model.Speciality;
 import udemy.spring.petclinic.model.Vet;
 import udemy.spring.petclinic.service.OwnerService;
 import udemy.spring.petclinic.service.PetService;
 import udemy.spring.petclinic.service.PetTypeService;
+import udemy.spring.petclinic.service.SpecialityService;
 import udemy.spring.petclinic.service.VetService;
 
 import java.time.LocalDate;
@@ -24,9 +26,9 @@ public class DataLoader implements CommandLineRunner {
     private final OwnerService ownerService;
     private final PetService petService;
     private final VetService vetService;
+    private final SpecialityService specialityService;
 
-    @Override
-    public void run(String... arguments) throws NullException {
+    private void loadData() throws NullException {
         PetType firstPetType = PetType.builder()
                 .name("Dog")
                 .build();
@@ -92,5 +94,26 @@ public class DataLoader implements CommandLineRunner {
                 .build();
         vetService.save(secondVet);
         log.info("[DataLoader] saved second vet: {}", secondVet);
+
+        Speciality firstSpeciality = Speciality.builder()
+                .description("radiology")
+                .build();
+        specialityService.save(firstSpeciality);
+        firstVet.getSpecialities().add(firstSpeciality);
+        log.info("[DataLoader] saved first speciality: {}", firstSpeciality);
+
+        Speciality secondSpeciality = Speciality.builder()
+                .description("surgery")
+                .build();
+        specialityService.save(secondSpeciality);
+        secondVet.getSpecialities().add(secondSpeciality);
+        log.info("[DataLoader] saved second speciality: {}", secondSpeciality);
+    }
+
+    @Override
+    public void run(String... arguments) throws NullException {
+        if (petTypeService.findAll().isEmpty()) {
+            loadData();
+        }
     }
 }

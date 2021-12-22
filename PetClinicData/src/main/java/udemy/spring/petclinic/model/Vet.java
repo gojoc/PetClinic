@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -12,7 +13,7 @@ import java.util.UUID;
 @Setter
 @ToString(callSuper = true)
 public class Vet extends Person {
-    private Set<Speciality> specialities;
+    private Set<Speciality> specialities = new HashSet<>();
 
     @Builder
     public Vet(UUID id, String firstName, String lastName) {
